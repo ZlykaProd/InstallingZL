@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>WinHelpZL — Windows Tools</title>
     <style>
-        /* ===== ГЛОБАЛЬНЫЙ СБРОС ===== */
         * {
             margin: 0;
             padding: 0;
@@ -23,7 +22,6 @@
             padding: 10px;
         }
 
-        /* ===== ФОНОВОЕ НЕОНОВОЕ СВЕЧЕНИЕ ===== */
         body::before {
             content: '';
             position: fixed;
@@ -33,16 +31,15 @@
             height: 200%;
             background: radial-gradient(circle at 30% 40%, rgba(0, 120, 255, 0.12) 0%, transparent 50%),
                         radial-gradient(circle at 70% 60%, rgba(120, 80, 255, 0.08) 0%, transparent 50%);
-            animation: backgroundGlow 10s ease-in-out infinite alternate;
+            animation: bgGlow 10s ease-in-out infinite alternate;
             z-index: 0;
         }
 
-        @keyframes backgroundGlow {
+        @keyframes bgGlow {
             0% { opacity: 0.5; transform: scale(1) rotate(0deg); }
             100% { opacity: 1; transform: scale(1.1) rotate(3deg); }
         }
 
-        /* ===== ОСНОВНОЙ КОНТЕЙНЕР ===== */
         .app-container {
             position: relative;
             z-index: 1;
@@ -60,20 +57,19 @@
             overflow: hidden;
         }
 
-        /* ===== УПРАВЛЕНИЕ СТРАНИЦАМИ ===== */
         .page {
             display: none;
             flex-direction: column;
             height: 100%;
             padding: 20px 14px 10px;
-            animation: pageTransition 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+            animation: fadeIn 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
         }
 
         .page.active {
             display: flex;
         }
 
-        @keyframes pageTransition {
+        @keyframes fadeIn {
             0% { opacity: 0; transform: translateY(25px) scale(0.96); }
             100% { opacity: 1; transform: translateY(0) scale(1); }
         }
@@ -92,9 +88,6 @@
             border-radius: 10px;
         }
 
-        /* ================================================
-           СТРАНИЦА 1: ВХОДНОЙ ЭКРАН
-           ================================================ */
         .entry-screen {
             justify-content: center;
             align-items: center;
@@ -104,11 +97,11 @@
 
         .logo-icon {
             font-size: 80px;
-            animation: logoFloat 3.5s ease-in-out infinite;
+            animation: float 3.5s ease-in-out infinite;
             filter: drop-shadow(0 0 50px rgba(0, 150, 255, 0.4));
         }
 
-        @keyframes logoFloat {
+        @keyframes float {
             0%, 100% { transform: translateY(0) scale(1); }
             50% { transform: translateY(-15px) scale(1.02); }
         }
@@ -134,7 +127,6 @@
             text-transform: uppercase;
         }
 
-        /* ===== НЕОНОВАЯ КНОПКА ===== */
         .neon-btn {
             background: linear-gradient(135deg, rgba(0, 120, 255, 0.15), rgba(0, 80, 255, 0.05));
             border: 1px solid rgba(0, 150, 255, 0.2);
@@ -147,7 +139,7 @@
             backdrop-filter: blur(10px);
             box-shadow: 0 0 30px rgba(0, 120, 255, 0.1);
             transition: all 0.3s ease;
-            animation: buttonPulse 2.5s ease-in-out infinite;
+            animation: pulse 2.5s ease-in-out infinite;
         }
 
         .neon-btn:hover {
@@ -156,7 +148,7 @@
             border-color: rgba(0, 150, 255, 0.5);
         }
 
-        @keyframes buttonPulse {
+        @keyframes pulse {
             0%, 100% { box-shadow: 0 0 20px rgba(0, 120, 255, 0.1); }
             50% { box-shadow: 0 0 50px rgba(0, 120, 255, 0.25); }
         }
@@ -168,9 +160,6 @@
             margin-top: 20px;
         }
 
-        /* ================================================
-           СТРАНИЦА 2: ВЫБОР ПРИЛОЖЕНИЯ
-           ================================================ */
         .page-header {
             display: flex;
             justify-content: space-between;
@@ -195,7 +184,6 @@
             border: 1px solid rgba(0, 150, 255, 0.05);
         }
 
-        /* ===== КАРТОЧКА ОДНОГО ПРИЛОЖЕНИЯ ===== */
         .app-single {
             flex: 1;
             display: flex;
@@ -312,17 +300,14 @@
             color: rgba(150, 200, 255, 0.08);
             font-size: 11px;
             letter-spacing: 3px;
-            animation: hintBlink 2s ease-in-out infinite;
+            animation: blink 2s ease-in-out infinite;
         }
 
-        @keyframes hintBlink {
+        @keyframes blink {
             0%, 100% { opacity: 0.3; }
             50% { opacity: 1; }
         }
 
-        /* ================================================
-           СТРАНИЦА 3: ДЕТАЛИ ПРИЛОЖЕНИЯ
-           ================================================ */
         .back-btn {
             background: none;
             border: none;
@@ -371,7 +356,6 @@
             font-size: 13px;
         }
 
-        /* ===== БЛОК НОВОСТЕЙ ===== */
         .news-block {
             background: rgba(255, 255, 255, 0.02);
             border-radius: 20px;
@@ -409,7 +393,6 @@
             margin-top: 3px;
         }
 
-        /* ===== КНОПКА СКАЧИВАНИЯ ===== */
         .download-btn-wrapper {
             text-decoration: none;
             display: block;
@@ -459,7 +442,6 @@
             letter-spacing: 3px;
         }
 
-        /* ===== СИСТЕМНЫЕ ТРЕБОВАНИЯ ===== */
         .requirements {
             background: rgba(0, 120, 255, 0.03);
             border-radius: 16px;
@@ -490,9 +472,6 @@
             border: 1px solid rgba(0, 150, 255, 0.03);
         }
 
-        /* ================================================
-           АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ
-           ================================================ */
         @media (max-width: 420px) {
             .app-container {
                 height: 100vh;
@@ -535,22 +514,16 @@
 
 <div class="app-container">
 
-    <!-- ================================================
-    СТРАНИЦА 1: ВХОДНОЙ ЭКРАН
-    ================================================ -->
     <div id="page-entry" class="page entry-screen active">
         <div class="logo-icon">🪟</div>
         <div>
             <div class="entry-title">WinHelp<span>ZL</span></div>
             <div class="entry-sub">Windows Tools</div>
         </div>
-        <button class="neon-btn" onclick="navigateToPage('page-apps')">Войти</button>
+        <button class="neon-btn" onclick="goToPage('page-apps')">Войти</button>
         <div class="footer-text">✦ версия 3.0 ✦</div>
     </div>
 
-    <!-- ================================================
-    СТРАНИЦА 2: ВЫБОР ПРИЛОЖЕНИЯ
-    ================================================ -->
     <div id="page-apps" class="page">
         <div class="page-header">
             <span class="page-title">Установка</span>
@@ -558,7 +531,7 @@
         </div>
         <div class="page-scroll">
             <div class="app-single">
-                <div class="app-card-big" onclick="openAppDetail()">
+                <div class="app-card-big" onclick="openApp()">
                     <span class="icon">🛠️</span>
                     <div class="name">WinHelp<span>ZL</span></div>
                     <div class="desc">Полный набор инструментов для Windows</div>
@@ -575,11 +548,8 @@
         </div>
     </div>
 
-    <!-- ================================================
-    СТРАНИЦА 3: ДЕТАЛИ ПРИЛОЖЕНИЯ
-    ================================================ -->
     <div id="page-detail" class="page">
-        <button class="back-btn" onclick="navigateToPage('page-apps')">←</button>
+        <button class="back-btn" onclick="goToPage('page-apps')">←</button>
         <div class="page-scroll">
             <div class="detail-header">
                 <div class="icon-big">🛠️</div>
@@ -593,7 +563,11 @@
                 <div class="news-title">— НОВОСТИ —</div>
                 <div class="news-item">
                     <div class="date">29 ИЮЛЯ 2026</div>
-                    <div class="text">Добавлена полная совместимость с Windows 11 24H2.</div>
+                    <div class="text">Создано приложение WinHelpZL — полный набор инструментов для Windows.</div>
+                </div>
+                <div class="news-item">
+                    <div class="date">28 ИЮЛЯ 2026</div>
+                    <div class="text">Добавлена полная совместимость с Windows 11 24H2 и Windows 10 22H2.</div>
                 </div>
                 <div class="news-item">
                     <div class="date">25 ИЮЛЯ 2026</div>
@@ -602,10 +576,6 @@
                 <div class="news-item">
                     <div class="date">20 ИЮЛЯ 2026</div>
                     <div class="text">Улучшен алгоритм ускорения загрузки системы.</div>
-                </div>
-                <div class="news-item">
-                    <div class="date">15 ИЮЛЯ 2026</div>
-                    <div class="text">Добавлена защита от вредоносных программ.</div>
                 </div>
             </div>
 
@@ -619,7 +589,7 @@
                 </div>
             </div>
 
-            <a id="downloadLink" href="assets/downloads/WinHelpZL.exe" class="download-btn-wrapper">
+            <a id="downloadLink" href="#" class="download-btn-wrapper" onclick="downloadFile()">
                 <button class="download-btn">
                     <span>⬇</span>
                     <span>Скачать WinHelpZL</span>
@@ -633,83 +603,69 @@
 </div>
 
 <script>
-    /**
-     * =============================================
-     * УПРАВЛЕНИЕ НАВИГАЦИЕЙ МЕЖДУ СТРАНИЦАМИ
-     * =============================================
-     */
-    function navigateToPage(pageId) {
-        // Скрыть все страницы
-        document.querySelectorAll('.page').forEach(function(page) {
-            page.classList.remove('active');
-        });
-
-        // Показать целевую страницу
-        const targetPage = document.getElementById(pageId);
-        if (targetPage) {
-            targetPage.classList.add('active');
-            // Прокрутка вверх
-            const scrollContainer = targetPage.querySelector('.page-scroll');
-            if (scrollContainer) {
-                scrollContainer.scrollTop = 0;
-            }
+    function goToPage(pageId) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        const target = document.getElementById(pageId);
+        if (target) {
+            target.classList.add('active');
+            const scroll = target.querySelector('.page-scroll');
+            if (scroll) scroll.scrollTop = 0;
         }
     }
 
-    /**
-     * =============================================
-     * ОТКРЫТИЕ СТРАНИЦЫ С ДЕТАЛЯМИ ПРИЛОЖЕНИЯ
-     * =============================================
-     */
-    function openAppDetail() {
-        navigateToPage('page-detail');
+    function openApp() {
+        goToPage('page-detail');
     }
 
-    /**
-     * =============================================
-     * ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ СТРАНИЦЫ
-     * =============================================
-     */
+    function downloadFile() {
+        // Создаем ссылку для скачивания
+        const link = document.createElement('a');
+        link.href = 'assets/downloads/WinHelpZL.exe';
+        link.download = 'WinHelpZL.exe';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        // Показываем уведомление
+        const btn = document.querySelector('.download-btn');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '✅ Скачивание началось...';
+        setTimeout(() => {
+            btn.innerHTML = originalText;
+        }, 3000);
+        
+        return false;
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
-        console.log('🛠️ WinHelpZL успешно загружен!');
-        console.log('📦 Путь к файлу: assets/downloads/WinHelpZL.exe');
+        console.log('🛠️ WinHelpZL загружен!');
+        console.log('📦 Файл: assets/downloads/WinHelpZL.exe');
+        console.log('💡 Нажмите кнопку "Скачать" для загрузки');
     });
 
-    /**
-     * =============================================
-     * ОБРАБОТЧИК КЛАВИШИ ESC ДЛЯ ВОЗВРАТА
-     * =============================================
-     */
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape' || event.key === 'Backspace') {
-            const detailPage = document.getElementById('page-detail');
-            if (detailPage.classList.contains('active')) {
-                navigateToPage('page-apps');
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' || e.key === 'Backspace') {
+            const detail = document.getElementById('page-detail');
+            if (detail.classList.contains('active')) {
+                goToPage('page-apps');
             }
         }
     });
 
-    /**
-     * =============================================
-     * ОБРАБОТЧИК СВАЙПА ВПРАВО ДЛЯ ВОЗВРАТА
-     * =============================================
-     */
     let touchStartX = 0;
     let touchEndX = 0;
 
-    document.addEventListener('touchstart', function(event) {
-        touchStartX = event.changedTouches[0].screenX;
+    document.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
     });
 
-    document.addEventListener('touchend', function(event) {
-        touchEndX = event.changedTouches[0].screenX;
-        var swipeDistance = touchStartX - touchEndX;
-
-        // Свайп вправо (отрицательное расстояние)
-        if (swipeDistance < -70) {
-            var detailPage = document.getElementById('page-detail');
-            if (detailPage.classList.contains('active')) {
-                navigateToPage('page-apps');
+    document.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchStartX - touchEndX;
+        if (diff < -70) {
+            const detail = document.getElementById('page-detail');
+            if (detail.classList.contains('active')) {
+                goToPage('page-apps');
             }
         }
     });
