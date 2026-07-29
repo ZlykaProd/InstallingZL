@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>InstallingZL — Неоновый мир программ</title>
+    <meta name="description" content="InstallingZL — установка программ в неоновом стиле">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="app-container">
+
+    <!-- ===== СТРАНИЦА 1: ВХОД ===== -->
+    <div id="page-entry" class="page entry-screen active">
+        <div class="logo-icon">⚡</div>
+        <div>
+            <div class="entry-title">Installing<span style="color: #7a5cff;">ZL</span></div>
+            <div class="entry-sub">НЕОНОВЫЙ УСТАНОВЩИК</div>
+        </div>
+        <button class="neon-btn" onclick="goToPage('page-apps')">
+            <span class="btn-text">Войти в систему</span>
+            <span class="btn-glow"></span>
+        </button>
+        <div class="footer-copyright">✦ v2.0.1 ✦</div>
+    </div>
+
+    <!-- ===== СТРАНИЦА 2: ВЫБОР ПРИЛОЖЕНИЙ ===== -->
+    <div id="page-apps" class="page">
+        <div class="page-header">
+            <span class="page-title">Библиотека</span>
+            <span class="page-badge">InstallingZL</span>
+        </div>
+        <div class="page-scroll">
+            <div class="app-grid" id="appGrid">
+                <!-- Карточки генерируются через JavaScript -->
+            </div>
+            <div class="grid-footer">✦ неоновый выбор ✦</div>
+        </div>
+    </div>
+
+    <!-- ===== СТРАНИЦА 3: ДЕТАЛИ ПРИЛОЖЕНИЯ ===== -->
+    <div id="page-detail" class="page">
+        <button class="back-btn" onclick="goToPage('page-apps')">←</button>
+        <div class="page-scroll">
+            <div class="detail-header" id="detail-header">
+                <div class="icon-big" id="detail-icon">📱</div>
+                <div class="info">
+                    <h2 id="detail-name">App Name</h2>
+                    <p id="detail-version">Версия 1.0.0</p>
+                </div>
+            </div>
+
+            <div class="news-block">
+                <div class="news-title">— НОВОСТИ —</div>
+                <div id="news-container">
+                    <!-- Новости генерируются через JavaScript -->
+                </div>
+            </div>
+
+            <a id="download-link" href="#" class="download-btn-wrapper">
+                <button class="download-btn">
+                    <span class="download-icon">⬇</span> 
+                    <span class="download-text">Скачать .exe</span>
+                    <span class="download-size" id="download-size">~15 МБ</span>
+                </button>
+            </a>
+            <div class="download-note">✦ версия для Windows ✦</div>
+        </div>
+    </div>
+
+</div>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
