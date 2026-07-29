@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>WinHelpZL — Инструменты для Windows 11</title>
+    <title>WinHelpZL — Windows Tools</title>
     <style>
         /* ===== БАЗА ===== */
         * {
@@ -166,7 +166,7 @@
             margin-top: 20px;
         }
 
-        /* ===== СТРАНИЦА 2: ВЫБОР ===== */
+        /* ===== СТРАНИЦА 2: ВЫБОР (ОДНО ПРИЛОЖЕНИЕ) ===== */
         .page-header {
             display: flex;
             justify-content: space-between;
@@ -275,14 +275,14 @@
         .app-card-big .features {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 12px;
             margin-top: 16px;
             flex-wrap: wrap;
         }
 
         .app-card-big .features span {
             color: rgba(150, 200, 255, 0.3);
-            font-size: 12px;
+            font-size: 11px;
             background: rgba(0, 120, 255, 0.05);
             padding: 4px 14px;
             border-radius: 20px;
@@ -532,7 +532,7 @@
         <div class="logo-icon">🪟</div>
         <div>
             <div class="entry-title">WinHelp<span>ZL</span></div>
-            <div class="entry-sub">Инструменты для Windows 11</div>
+            <div class="entry-sub">Windows Tools</div>
         </div>
         <button class="neon-btn" onclick="goToPage('page-apps')">Войти</button>
         <div class="footer-text">✦ версия 3.0 ✦</div>
@@ -542,19 +542,20 @@
     <div id="page-apps" class="page">
         <div class="page-header">
             <span class="page-title">Установка</span>
-            <span class="page-badge">⭐ Единственное</span>
+            <span class="page-badge">⭐ Только WinHelpZL</span>
         </div>
         <div class="page-scroll">
             <div class="app-single">
                 <div class="app-card-big" onclick="openApp()">
                     <span class="icon">🛠️</span>
                     <div class="name">WinHelp<span>ZL</span></div>
-                    <div class="desc">Полный набор инструментов для Windows 11</div>
+                    <div class="desc">Полный набор инструментов для Windows</div>
                     <div class="features">
                         <span>⚡ Оптимизация</span>
                         <span>🛡️ Безопасность</span>
                         <span>🧹 Очистка</span>
                         <span>🚀 Ускорение</span>
+                        <span>📁 Управление</span>
                     </div>
                     <div class="glow-line"></div>
                 </div>
@@ -571,7 +572,7 @@
                 <div class="icon-big">🛠️</div>
                 <div class="info">
                     <h2>WinHelp<span>ZL</span></h2>
-                    <p>Версия 3.0.2 · Инструменты для Windows 11</p>
+                    <p>Версия 3.0.2 · Windows Tools</p>
                 </div>
             </div>
 
@@ -594,16 +595,20 @@
                         <div class="date">15 ИЮЛЯ 2026</div>
                         <div class="text">Добавлена защита от вредоносных программ.</div>
                     </div>
+                    <div class="news-item">
+                        <div class="date">10 ИЮЛЯ 2026</div>
+                        <div class="text">Обновлён интерфейс в неоновом стиле.</div>
+                    </div>
                 </div>
             </div>
 
             <div class="requirements">
                 <div class="title">СИСТЕМНЫЕ ТРЕБОВАНИЯ</div>
                 <div class="list">
-                    <span>🪟 Windows 11</span>
+                    <span>🪟 Windows 10/11</span>
                     <span>💾 500 МБ RAM</span>
                     <span>📦 100 МБ места</span>
-                    <span>🌐 x64</span>
+                    <span>🌐 x64 / x86</span>
                 </div>
             </div>
 
@@ -614,7 +619,7 @@
                     <span class="download-size">~25 МБ</span>
                 </button>
             </a>
-            <div class="download-note">✦ полная версия для Windows 11 ✦</div>
+            <div class="download-note">✦ полная версия для Windows ✦</div>
         </div>
     </div>
 
@@ -637,10 +642,8 @@
         goToPage('page-detail');
     }
 
-    // ===== ОБНОВЛЕНИЕ ССЫЛКИ (если файл переименован) =====
+    // ===== ЗАПУСК =====
     document.addEventListener('DOMContentLoaded', function() {
-        const link = document.getElementById('downloadLink');
-        // Можно изменить ссылку динамически, если нужно
         console.log('🛠️ WinHelpZL загружен!');
         console.log('📦 Нажмите на карточку, чтобы перейти к скачиванию.');
     });
