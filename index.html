@@ -3,12 +3,404 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>InstallingZL — Неоновый мир программ</title>
-    <meta name="description" content="InstallingZL — установка программ в неоновом стиле">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <title>InstallingZL</title>
+    <style>
+        /* ===== БАЗА ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: #0b0a0f;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 10px;
+        }
+
+        /* ===== КОНТЕЙНЕР ===== */
+        .app-container {
+            width: 100%;
+            max-width: 400px;
+            height: 780px;
+            background: rgba(18, 16, 26, 0.85);
+            backdrop-filter: blur(30px);
+            border-radius: 40px;
+            padding: 16px 12px;
+            box-shadow: 0 20px 80px rgba(120, 80, 255, 0.3), 0 0 0 1px rgba(200, 160, 255, 0.1) inset;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* ===== СТРАНИЦЫ ===== */
+        .page {
+            display: none;
+            flex-direction: column;
+            height: 100%;
+            padding: 20px 14px 10px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .page-scroll {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .page-scroll::-webkit-scrollbar {
+            width: 3px;
+        }
+        .page-scroll::-webkit-scrollbar-thumb {
+            background: rgba(180, 130, 255, 0.3);
+            border-radius: 10px;
+        }
+
+        /* ===== СТРАНИЦА 1: ВХОД ===== */
+        .entry-screen {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            gap: 25px;
+        }
+
+        .logo-icon {
+            font-size: 80px;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 40px rgba(160, 120, 255, 0.5));
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .entry-title {
+            font-size: 40px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #d4bfff, #7a5cff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        .entry-title span {
+            -webkit-text-fill-color: #7a5cff;
+        }
+
+        .entry-sub {
+            color: rgba(210, 190, 255, 0.4);
+            font-size: 14px;
+            letter-spacing: 4px;
+            margin-top: -5px;
+        }
+
+        /* ===== КНОПКИ ===== */
+        .neon-btn {
+            background: linear-gradient(135deg, rgba(160, 120, 255, 0.15), rgba(100, 80, 255, 0.05));
+            border: 1px solid rgba(200, 170, 255, 0.2);
+            padding: 18px 50px;
+            border-radius: 60px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #f0edff;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 30px rgba(160, 120, 255, 0.1);
+            transition: all 0.3s ease;
+            animation: pulse 2.5s ease-in-out infinite;
+        }
+
+        .neon-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 60px rgba(160, 120, 255, 0.3);
+            border-color: rgba(220, 190, 255, 0.5);
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(160, 120, 255, 0.1); }
+            50% { box-shadow: 0 0 50px rgba(160, 120, 255, 0.25); }
+        }
+
+        .footer-text {
+            color: rgba(200, 185, 255, 0.06);
+            font-size: 11px;
+            letter-spacing: 3px;
+            margin-top: 20px;
+        }
+
+        /* ===== СТРАНИЦА 2: ВЫБОР ===== */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .page-title {
+            color: #f0edff;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .page-badge {
+            color: rgba(200, 185, 255, 0.2);
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+
+        /* ===== СЕТКА КАРТОЧЕК ===== */
+        .app-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            padding: 15px 0 20px;
+        }
+
+        .app-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 24px;
+            padding: 22px 12px 18px;
+            text-align: center;
+            border: 1px solid rgba(200, 170, 255, 0.06);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .app-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(200, 170, 255, 0.25);
+            box-shadow: 0 12px 40px rgba(120, 80, 255, 0.15);
+        }
+
+        .app-card .icon {
+            font-size: 40px;
+            display: block;
+            margin-bottom: 6px;
+            transition: transform 0.3s ease;
+        }
+
+        .app-card:hover .icon {
+            transform: scale(1.1) rotate(-3deg);
+        }
+
+        .app-card .name {
+            color: #e8e0ff;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .app-card .desc {
+            color: rgba(200, 185, 255, 0.4);
+            font-size: 11px;
+            font-weight: 300;
+        }
+
+        .app-card .glow-line {
+            width: 30px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(180, 138, 255, 0.3), transparent);
+            border-radius: 10px;
+            margin: 8px auto 0;
+            transition: width 0.3s ease;
+        }
+
+        .app-card:hover .glow-line {
+            width: 50px;
+            background: linear-gradient(90deg, transparent, #b48aff, transparent);
+        }
+
+        .grid-footer {
+            text-align: center;
+            color: rgba(200, 185, 255, 0.05);
+            font-size: 11px;
+            letter-spacing: 3px;
+            padding: 10px 0;
+        }
+
+        /* ===== СТРАНИЦА 3: ДЕТАЛИ ===== */
+        .back-btn {
+            background: none;
+            border: none;
+            color: rgba(200, 185, 255, 0.5);
+            font-size: 28px;
+            cursor: pointer;
+            align-self: flex-start;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+            padding: 0 4px;
+        }
+
+        .back-btn:hover {
+            color: #cbb5ff;
+            transform: translateX(-5px);
+        }
+
+        .detail-header {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(200, 170, 255, 0.05);
+        }
+
+        .detail-header .icon-big {
+            font-size: 50px;
+            filter: drop-shadow(0 0 25px rgba(160, 120, 255, 0.2));
+        }
+
+        .detail-header .info h2 {
+            color: #f0edff;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .detail-header .info p {
+            color: rgba(200, 185, 255, 0.4);
+            font-size: 13px;
+        }
+
+        /* ===== НОВОСТИ ===== */
+        .news-block {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 20px;
+            padding: 16px;
+            margin: 10px 0 20px;
+            border: 1px solid rgba(200, 170, 255, 0.04);
+        }
+
+        .news-title {
+            color: rgba(200, 185, 255, 0.2);
+            font-size: 11px;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+        .news-item {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        .news-item:last-child {
+            border-bottom: none;
+        }
+
+        .news-item .date {
+            font-size: 10px;
+            color: rgba(160, 130, 255, 0.4);
+            letter-spacing: 1px;
+        }
+
+        .news-item .text {
+            color: rgba(220, 210, 255, 0.7);
+            font-size: 13px;
+            line-height: 1.5;
+            margin-top: 3px;
+        }
+
+        /* ===== КНОПКА СКАЧАТЬ ===== */
+        .download-btn-wrapper {
+            text-decoration: none;
+            display: block;
+            width: 100%;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #8a6eff, #6a4aff);
+            border: none;
+            padding: 18px 20px;
+            border-radius: 60px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            cursor: pointer;
+            box-shadow: 0 8px 30px rgba(120, 80, 255, 0.35);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .download-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 50px rgba(120, 80, 255, 0.5);
+            background: linear-gradient(135deg, #9a7aff, #7a5aff);
+        }
+
+        .download-btn:active {
+            transform: scale(0.96);
+        }
+
+        .download-size {
+            font-size: 12px;
+            font-weight: 400;
+            opacity: 0.6;
+        }
+
+        .download-note {
+            color: rgba(200, 185, 255, 0.06);
+            font-size: 11px;
+            text-align: center;
+            margin-top: 14px;
+            letter-spacing: 3px;
+        }
+
+        /* ===== АНИМАЦИЯ КАРТОЧЕК ===== */
+        .app-card {
+            opacity: 0;
+            animation: cardAppear 0.5s ease forwards;
+        }
+        .app-card:nth-child(1) { animation-delay: 0.05s; }
+        .app-card:nth-child(2) { animation-delay: 0.12s; }
+        .app-card:nth-child(3) { animation-delay: 0.19s; }
+        .app-card:nth-child(4) { animation-delay: 0.26s; }
+        .app-card:nth-child(5) { animation-delay: 0.33s; }
+        .app-card:nth-child(6) { animation-delay: 0.40s; }
+
+        @keyframes cardAppear {
+            0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* ===== МОБИЛЬНАЯ АДАПТАЦИЯ ===== */
+        @media (max-width: 420px) {
+            .app-container {
+                height: 100vh;
+                max-height: 820px;
+                border-radius: 0;
+                padding: 12px 10px;
+            }
+            .entry-title {
+                font-size: 34px;
+            }
+            .app-grid {
+                gap: 12px;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -18,54 +410,47 @@
     <div id="page-entry" class="page entry-screen active">
         <div class="logo-icon">⚡</div>
         <div>
-            <div class="entry-title">Installing<span style="color: #7a5cff;">ZL</span></div>
+            <div class="entry-title">Installing<span>ZL</span></div>
             <div class="entry-sub">НЕОНОВЫЙ УСТАНОВЩИК</div>
         </div>
-        <button class="neon-btn" onclick="goToPage('page-apps')">
-            <span class="btn-text">Войти в систему</span>
-            <span class="btn-glow"></span>
-        </button>
-        <div class="footer-copyright">✦ v2.0.1 ✦</div>
+        <button class="neon-btn" onclick="goToPage('page-apps')">Войти</button>
+        <div class="footer-text">✦ v2.0 ✦</div>
     </div>
 
-    <!-- ===== СТРАНИЦА 2: ВЫБОР ПРИЛОЖЕНИЙ ===== -->
+    <!-- ===== СТРАНИЦА 2: ВЫБОР ===== -->
     <div id="page-apps" class="page">
         <div class="page-header">
             <span class="page-title">Библиотека</span>
             <span class="page-badge">InstallingZL</span>
         </div>
         <div class="page-scroll">
-            <div class="app-grid" id="appGrid">
-                <!-- Карточки генерируются через JavaScript -->
-            </div>
+            <div class="app-grid" id="appGrid"></div>
             <div class="grid-footer">✦ неоновый выбор ✦</div>
         </div>
     </div>
 
-    <!-- ===== СТРАНИЦА 3: ДЕТАЛИ ПРИЛОЖЕНИЯ ===== -->
+    <!-- ===== СТРАНИЦА 3: ДЕТАЛИ ===== -->
     <div id="page-detail" class="page">
         <button class="back-btn" onclick="goToPage('page-apps')">←</button>
         <div class="page-scroll">
-            <div class="detail-header" id="detail-header">
-                <div class="icon-big" id="detail-icon">📱</div>
+            <div class="detail-header">
+                <div class="icon-big" id="detailIcon">📱</div>
                 <div class="info">
-                    <h2 id="detail-name">App Name</h2>
-                    <p id="detail-version">Версия 1.0.0</p>
+                    <h2 id="detailName">App Name</h2>
+                    <p id="detailVersion">Версия 1.0.0</p>
                 </div>
             </div>
 
             <div class="news-block">
                 <div class="news-title">— НОВОСТИ —</div>
-                <div id="news-container">
-                    <!-- Новости генерируются через JavaScript -->
-                </div>
+                <div id="newsContainer"></div>
             </div>
 
-            <a id="download-link" href="#" class="download-btn-wrapper">
+            <a id="downloadLink" href="#" class="download-btn-wrapper">
                 <button class="download-btn">
-                    <span class="download-icon">⬇</span> 
-                    <span class="download-text">Скачать .exe</span>
-                    <span class="download-size" id="download-size">~15 МБ</span>
+                    <span>⬇</span>
+                    <span>Скачать .exe</span>
+                    <span class="download-size" id="downloadSize">~15 МБ</span>
                 </button>
             </a>
             <div class="download-note">✦ версия для Windows ✦</div>
@@ -74,6 +459,153 @@
 
 </div>
 
-<script src="assets/js/main.js"></script>
+<script>
+    // ===== ДАННЫЕ ПРИЛОЖЕНИЙ =====
+    const apps = [
+        {
+            id: 1,
+            name: 'ZL Boost',
+            icon: '🚀',
+            version: '2.4.1',
+            desc: 'Оптимизатор системы',
+            file: 'assets/downloads/app1.exe',
+            size: '~15 МБ',
+            news: [
+                { date: '28 ИЮЛЯ 2026', text: 'Добавлен новый режим ускорения загрузки.' },
+                { date: '20 ИЮЛЯ 2026', text: 'Исправлена ошибка с определением драйверов.' },
+                { date: '10 ИЮЛЯ 2026', text: 'Обновлён интерфейс в неоновом стиле.' }
+            ]
+        },
+        {
+            id: 2,
+            name: 'ZL Guard',
+            icon: '🛡️',
+            version: '1.2.0',
+            desc: 'Защита и безопасность',
+            file: 'assets/downloads/app2.exe',
+            size: '~22 МБ',
+            news: [
+                { date: '25 ИЮЛЯ 2026', text: 'Обновлены базы вирусов до актуальной версии.' },
+                { date: '15 ИЮЛЯ 2026', text: 'Добавлена защита от фишинговых сайтов.' },
+                { date: '05 ИЮЛЯ 2026', text: 'Улучшена производительность сканирования.' }
+            ]
+        },
+        {
+            id: 3,
+            name: 'ZL Media',
+            icon: '🎵',
+            version: '3.0.1',
+            desc: 'Мультимедиа плеер',
+            file: 'assets/downloads/app3.exe',
+            size: '~28 МБ',
+            news: [
+                { date: '30 ИЮЛЯ 2026', text: 'Добавлена поддержка новых аудиоформатов.' },
+                { date: '18 ИЮЛЯ 2026', text: 'Визуализация теперь работает в реальном времени.' },
+                { date: '08 ИЮЛЯ 2026', text: 'Исправлены мелкие ошибки воспроизведения.' }
+            ]
+        },
+        {
+            id: 4,
+            name: 'ZL Studio',
+            icon: '🎨',
+            version: '0.9.5',
+            desc: 'Редактор изображений',
+            file: 'assets/downloads/app4.exe',
+            size: '~35 МБ',
+            news: [
+                { date: '27 ИЮЛЯ 2026', text: 'Добавлены неоновые фильтры и эффекты.' },
+                { date: '16 ИЮЛЯ 2026', text: 'Улучшена работа с большими изображениями.' },
+                { date: '06 ИЮЛЯ 2026', text: 'Новые кисти и инструменты для рисования.' }
+            ]
+        },
+        {
+            id: 5,
+            name: 'ZL Connect',
+            icon: '🌐',
+            version: '1.1.3',
+            desc: 'Удалённый доступ',
+            file: 'assets/downloads/app5.exe',
+            size: '~18 МБ',
+            news: [
+                { date: '29 ИЮЛЯ 2026', text: 'Улучшена скорость соединения с серверами.' },
+                { date: '19 ИЮЛЯ 2026', text: 'Добавлен режим низкой задержки.' },
+                { date: '09 ИЮЛЯ 2026', text: 'Исправлена ошибка переподключения.' }
+            ]
+        },
+        {
+            id: 6,
+            name: 'ZL Cleaner',
+            icon: '🧹',
+            version: '2.0.2',
+            desc: 'Очистка системы',
+            file: 'assets/downloads/app6.exe',
+            size: '~12 МБ',
+            news: [
+                { date: '26 ИЮЛЯ 2026', text: 'Обновлён алгоритм поиска мусорных файлов.' },
+                { date: '17 ИЮЛЯ 2026', text: 'Добавлена очистка кэша браузеров.' },
+                { date: '07 ИЮЛЯ 2026', text: 'Ускорена работа программы на 25%.' }
+            ]
+        }
+    ];
+
+    // ===== УПРАВЛЕНИЕ СТРАНИЦАМИ =====
+    function goToPage(pageId) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        const target = document.getElementById(pageId);
+        if (target) {
+            target.classList.add('active');
+            const scroll = target.querySelector('.page-scroll');
+            if (scroll) scroll.scrollTop = 0;
+        }
+    }
+
+    // ===== ОТКРЫТЬ ПРИЛОЖЕНИЕ =====
+    function openApp(id) {
+        const app = apps.find(a => a.id === id);
+        if (!app) return;
+
+        document.getElementById('detailIcon').textContent = app.icon;
+        document.getElementById('detailName').textContent = app.name;
+        document.getElementById('detailVersion').textContent = 'Версия ' + app.version;
+        document.getElementById('downloadSize').textContent = app.size;
+
+        // Новости
+        const container = document.getElementById('newsContainer');
+        container.innerHTML = app.news.map(n => `
+            <div class="news-item">
+                <div class="date">${n.date}</div>
+                <div class="text">${n.text}</div>
+            </div>
+        `).join('');
+
+        // Ссылка скачивания
+        const link = document.getElementById('downloadLink');
+        link.href = app.file;
+        link.download = app.file.split('/').pop();
+
+        goToPage('page-detail');
+    }
+
+    // ===== ГЕНЕРАЦИЯ КАРТОЧЕК =====
+    function renderApps() {
+        const grid = document.getElementById('appGrid');
+        grid.innerHTML = apps.map(app => `
+            <div class="app-card" onclick="openApp(${app.id})">
+                <span class="icon">${app.icon}</span>
+                <div class="name">${app.name}</div>
+                <div class="desc">${app.desc}</div>
+                <div class="glow-line"></div>
+            </div>
+        `).join('');
+    }
+
+    // ===== ЗАПУСК =====
+    renderApps();
+
+    // Сообщение о предпросмотре
+    console.log('✨ InstallingZL загружен!');
+    console.log('📦 Доступно приложений:', apps.length);
+</script>
+
 </body>
 </html>
